@@ -282,18 +282,20 @@ body {
   background-color: #000;
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
+  /* grid-template-columns will be set by JS based on MAP_WIDTH */
   overflow: scroll;
   /* NEW: Use image-rendering for crisp pixel art */
   image-rendering: -moz-crisp-edges;
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated;
+  /* Add default column count for initial render or fallback */
+  grid-template-columns: repeat(20, 1fr); 
 }
 
 /* Tile styling */
 .tile {
-  width: 100%;
-  height: 30px;
+  width: 100%; /* Tiles will dynamically size within the grid */
+  height: 30px; /* Fixed height for tiles */
   border: 1px solid #111;
   box-sizing: border-box;
   cursor: pointer;
@@ -309,6 +311,69 @@ body {
   justify-content: center;
   align-items: center;
   transition: all 0.1s ease-in-out;
+}
+
+/* === TILE IMAGE DEFINITIONS === */
+/* These styles will use the `data-tile-type` attribute set by JavaScript.
+   This allows CSS to control the background image based on the tile's type ID. */
+
+.tile[data-tile-type="ground_field"] {
+    background-image: url('assets/tiles/ground_field.png');
+}
+.tile[data-tile-type="ground_wooden_floor"] {
+    background-image: url('assets/tiles/ground_wooden_floor.png');
+}
+.tile[data-tile-type="ground_stone"] { /* Added this one */
+    background-image: url('assets/tiles/ground_stone.png');
+}
+.tile[data-tile-type="ground_road"] {
+    background-image: url('assets/tiles/ground_road.png');
+}
+.tile[data-tile-type="ground_river"] {
+    background-image: url('assets/tiles/ground_river.png');
+}
+
+.tile[data-tile-type="wall_house"] {
+    background-image: url('assets/tiles/wall_house.png');
+}
+.tile[data-tile-type="wall_castle"] {
+    background-image: url('assets/tiles/wall_castle.png');
+}
+.tile[data-tile-type="wall_cave"] {
+    background-image: url('assets/tiles/wall_cave.png');
+}
+.tile[data-tile-type="wall_rock"] {
+    background-image: url('assets/tiles/wall_rock.png');
+}
+.tile[data-tile-type="lava"] {
+    background-image: url('assets/tiles/lava.png');
+}
+.tile[data-tile-type="water_lake"] {
+    background-image: url('assets/tiles/water_lake.png');
+}
+
+.tile[data-tile-type="door_house"] {
+    background-image: url('assets/tiles/doorway_house.png');
+}
+.tile[data-tile-type="door_cave"] {
+    background-image: url('assets/tiles/doorway_cave.png');
+}
+.tile[data-tile-type="door_gate"] {
+    background-image: url('assets/tiles/doorway_gate.png');
+}
+.tile[data-tile-type="stairs_up"] {
+    background-image: url('assets/tiles/stairs_up.png');
+}
+.tile[data-tile-type="stairs_down"] {
+    background-image: url('assets/tiles/stairs_down.png');
+}
+.tile[data-tile-type="bridge"] {
+    background-image: url('assets/tiles/bridge.png');
+}
+/* For the utility blank wall, if ever rendered visually */
+.tile[data-tile-type="blank_wall"] {
+    background-color: #333333;
+    background-image: none; /* Ensure no default image interferes */
 }
 
 /* HIGHLIGHT STYLES (NEW) */
